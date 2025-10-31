@@ -4,42 +4,33 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
-    --primary: 221.2 83.2% 53.3%;
-    --primary-foreground: 210 40% 98%;
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
-    --border: 214.3 31.8% 91.4%;
+    /* Custom Color Palette */
+    --bg-main: #0B0F14;
+    --bg-card: #11161C;
+    --color-primary-purple: #8B5CF6;
+    --color-primary-blue: #3B82F6;
+    --color-heading: #E5E7EB;
+    --color-paragraph: #9CA3AF;
+    --color-success: #10B981;
+    
+    --background: 11 15 20;
+    --foreground: 229 231 235;
+    --card: 17 22 28;
+    --primary: 139 92 246;
+    --secondary: 59 130 246;
+    --muted: 156 163 175;
+    --success: 16 185 129;
     --radius: 0.5rem;
-  }
-
-  .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
-    --primary: 217.2 91.2% 59.8%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
-    --accent: 217.2 32.6% 17.5%;
-    --accent-foreground: 210 40% 98%;
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
-    --border: 217.2 32.6% 17.5%;
   }
 }
 
 @layer base {
   * {
-    @apply border-border;
+    @apply border-gray-700;
   }
   
   body {
-    @apply bg-background text-foreground;
+    @apply bg-[#0B0F14] text-[#E5E7EB];
     font-feature-settings: "rlig" 1, "calt" 1;
   }
 
@@ -51,16 +42,16 @@
 @layer components {
   /* Button Styles */
   .btn-primary {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl hover:scale-105 transition-all duration-300;
+    @apply bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-8 py-4 rounded-lg font-semibold text-lg hover:shadow-2xl hover:shadow-purple-500/20 hover:scale-105 transition-all duration-300;
   }
 
   .btn-secondary {
-    @apply bg-white text-gray-900 px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-200 hover:border-blue-500 hover:shadow-lg transition-all duration-300;
+    @apply bg-[#11161C] text-[#E5E7EB] px-8 py-4 rounded-lg font-semibold text-lg border-2 border-gray-700 hover:border-[#8B5CF6] hover:shadow-lg hover:shadow-purple-500/10 transition-all duration-300;
   }
 
   /* Card Styles */
   .card {
-    @apply bg-white rounded-xl shadow-lg hover:shadow-2xl transition-all duration-300 p-6;
+    @apply bg-[#11161C] rounded-xl shadow-lg shadow-black/20 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300 p-6 border border-gray-800;
   }
 
   /* Section Container */
@@ -70,16 +61,27 @@
 
   /* Gradient Text */
   .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+    @apply bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] bg-clip-text text-transparent;
   }
 
   /* Animated Gradient Background */
   .gradient-bg {
-    @apply bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50;
+    @apply bg-gradient-to-br from-[#0B0F14] via-[#1a1f2e] to-[#0B0F14];
+    background-size: 200% 200%;
+    animation: gradientShift 15s ease infinite;
   }
 }
 
 /* Custom Animations */
+@keyframes gradientShift {
+  0%, 100% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+}
+
 @keyframes float {
   0%, 100% {
     transform: translateY(0px);

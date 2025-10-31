@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X, Sparkles } from 'lucide-react';
+import Image from 'next/image';
 
 const navLinks = [
   { name: 'Home', href: '#', scrollTo: 'top' },
@@ -64,17 +65,22 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-20">
             {/* Logo */}
             <motion.div
-              className="flex items-center gap-2 cursor-pointer"
+              className="flex items-center gap-3 cursor-pointer"
               onClick={() => handleScroll('top')}
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
             >
-              <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-purple-600 rounded-lg flex items-center justify-center">
-                <Sparkles className="w-6 h-6 text-white" />
-              </div>
+              {/* Custom Logo */}
+              <Image 
+                src="/logo.svg" 
+                alt="ScalibleOne Logo" 
+                width={55} 
+                height={55} 
+                className="w-[55px] h-[55px]"
+              />
               <span
-                className={`text-xl font-bold ${
-                  isScrolled ? 'text-gray-900' : 'text-white'
+                className={`text-xl font-bold transition-colors ${
+                  isScrolled ? 'text-gray-900' : 'text-gray-900'
                 }`}
               >
                 ScalibleOne
