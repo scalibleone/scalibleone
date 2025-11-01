@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 
 const navLinks = [
   { name: 'How We Work', scrollTo: 'how-it-works' },
@@ -99,18 +100,18 @@ export default function Navbar() {
             <div className="flex items-center gap-3">
               {/* Desktop: Login/Signup */}
               <div className="hidden md:flex items-center gap-3">
-                <button
-                  onClick={() => console.log('Login clicked')}
+                <Link
+                  href="/login"
                   className="text-sm font-medium text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors px-4 py-2"
                 >
                   Login
-                </button>
-                <button
-                  onClick={() => console.log('Signup clicked')}
+                </Link>
+                <Link
+                  href="/signup"
                   className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white text-sm font-semibold px-5 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
                 >
                   Sign Up
-                </button>
+                </Link>
               </div>
 
               {/* Mobile Menu Button */}
@@ -155,24 +156,20 @@ export default function Navbar() {
 
               {/* Mobile: Login/Signup */}
               <div className="pt-4 space-y-3 border-t border-gray-800">
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    console.log('Login clicked');
-                  }}
-                  className="w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
+                <Link
+                  href="/login"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
                 >
                   Login
-                </button>
-                <button
-                  onClick={() => {
-                    setIsMobileMenuOpen(false);
-                    console.log('Signup clicked');
-                  }}
-                  className="w-full bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                </Link>
+                <Link
+                  href="/signup"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                  className="block w-full text-center bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
                 >
                   Sign Up
-                </button>
+                </Link>
               </div>
             </div>
           </motion.div>
