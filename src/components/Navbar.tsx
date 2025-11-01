@@ -2,15 +2,15 @@
 
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Menu, X, Sparkles } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
 
 const navLinks = [
-  { name: 'Home', href: '#', scrollTo: 'top' },
-  { name: 'How We Work', href: '#how-it-works', scrollTo: 'how-it-works' },
-  { name: 'About', href: '#about-section', scrollTo: 'about-section' },
-  { name: 'Services', href: '#services', scrollTo: 'services' },
-  { name: 'Portfolio', href: '#demo-section', scrollTo: 'demo-section' },
+  { name: 'How We Work', scrollTo: 'how-it-works' },
+  { name: 'About', scrollTo: 'about-section' },
+  { name: 'Services', scrollTo: 'services' },
+  { name: 'Portfolio', scrollTo: 'demo-section' },
+  { name: 'Pricing', scrollTo: 'pricing' }, // Will be added later
 ];
 
 export default function Navbar() {
@@ -38,7 +38,7 @@ export default function Navbar() {
 
     const element = document.getElementById(scrollTo);
     if (element) {
-      const offset = 80; // Account for navbar height
+      const offset = 70; // Account for navbar height
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -57,74 +57,74 @@ export default function Navbar() {
         transition={{ duration: 0.5 }}
         className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
           isScrolled
-            ? 'bg-white/90 backdrop-blur-lg shadow-lg'
+            ? 'bg-[#0B0F14]/95 backdrop-blur-lg shadow-lg border-b border-gray-800'
             : 'bg-transparent'
         }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex items-center justify-between h-20">
-            {/* Logo */}
+          <div className="flex items-center justify-between h-16">
+            {/* Left: Logo + Name */}
             <motion.div
               className="flex items-center gap-3 cursor-pointer"
               onClick={() => handleScroll('top')}
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
             >
-              {/* Custom Logo */}
               <Image 
                 src="/logo.svg" 
                 alt="ScalibleOne Logo" 
-                width={55} 
-                height={55} 
-                className="w-[55px] h-[55px]"
+                width={45} 
+                height={45} 
+                className="w-[45px] h-[45px]"
               />
-              <span
-                className={`text-xl font-bold transition-colors ${
-                  isScrolled ? 'text-gray-900' : 'text-gray-900'
-                }`}
-              >
+              <span className="text-lg font-bold text-[#E5E7EB]">
                 ScalibleOne
               </span>
             </motion.div>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center gap-8">
+            {/* Center: Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-6">
               {navLinks.map((link) => (
                 <button
                   key={link.name}
                   onClick={() => handleScroll(link.scrollTo)}
-                  className={`text-sm font-medium transition-colors hover:text-purple-600 ${
-                    isScrolled ? 'text-gray-700' : 'text-white/90'
-                  }`}
+                  className="text-sm font-medium text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors"
                 >
                   {link.name}
                 </button>
               ))}
-
-              {/* CTA Button */}
-              <button
-                onClick={() => handleScroll('contact-form')}
-                className="bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-2.5 rounded-lg font-semibold text-sm hover:shadow-xl hover:scale-105 transition-all duration-300"
-              >
-                Get Started
-              </button>
             </div>
 
-            {/* Mobile Menu Button */}
-            <button
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className={`md:hidden p-2 rounded-lg transition-colors ${
-                isScrolled
-                  ? 'text-gray-900 hover:bg-gray-100'
-                  : 'text-white hover:bg-white/10'
-              }`}
-            >
-              {isMobileMenuOpen ? (
-                <X className="w-6 h-6" />
-              ) : (
-                <Menu className="w-6 h-6" />
-              )}
-            </button>
+            {/* Right: Login/Signup + Mobile Menu */}
+            <div className="flex items-center gap-3">
+              {/* Desktop: Login/Signup */}
+              <div className="hidden md:flex items-center gap-3">
+                <button
+                  onClick={() => console.log('Login clicked')}
+                  className="text-sm font-medium text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors px-4 py-2"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => console.log('Signup clicked')}
+                  className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white text-sm font-semibold px-5 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                >
+                  Sign Up
+                </button>
+              </div>
+
+              {/* Mobile Menu Button */}
+              <button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                className="lg:hidden p-2 rounded-lg text-[#E5E7EB] hover:bg-[#11161C] transition-colors"
+              >
+                {isMobileMenuOpen ? (
+                  <X className="w-5 h-5" />
+                ) : (
+                  <Menu className="w-5 h-5" />
+                )}
+              </button>
+            </div>
           </div>
         </div>
       </motion.nav>
@@ -137,9 +137,9 @@ export default function Navbar() {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            className="fixed top-20 left-0 right-0 z-40 md:hidden bg-white shadow-2xl overflow-hidden"
+            className="fixed top-16 left-0 right-0 z-40 lg:hidden bg-[#0B0F14]/98 backdrop-blur-lg border-b border-gray-800 shadow-2xl overflow-hidden"
           >
-            <div className="px-4 py-6 space-y-4">
+            <div className="px-4 py-6 space-y-3">
               {navLinks.map((link, index) => (
                 <motion.button
                   key={link.name}
@@ -147,29 +147,40 @@ export default function Navbar() {
                   animate={{ opacity: 1, x: 0 }}
                   transition={{ delay: index * 0.1 }}
                   onClick={() => handleScroll(link.scrollTo)}
-                  className="block w-full text-left px-4 py-3 text-gray-700 font-medium hover:bg-purple-50 hover:text-purple-600 rounded-lg transition-colors"
+                  className="block w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
                 >
                   {link.name}
                 </motion.button>
               ))}
 
-              {/* Mobile CTA Button */}
-              <motion.button
-                initial={{ opacity: 0, x: -20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: navLinks.length * 0.1 }}
-                onClick={() => handleScroll('contact-form')}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold hover:shadow-xl transition-all duration-300"
-              >
-                Get Started
-              </motion.button>
+              {/* Mobile: Login/Signup */}
+              <div className="pt-4 space-y-3 border-t border-gray-800">
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    console.log('Login clicked');
+                  }}
+                  className="w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
+                >
+                  Login
+                </button>
+                <button
+                  onClick={() => {
+                    setIsMobileMenuOpen(false);
+                    console.log('Signup clicked');
+                  }}
+                  className="w-full bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                >
+                  Sign Up
+                </button>
+              </div>
             </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Spacer to prevent content from going under fixed navbar */}
-      <div className="h-20"></div>
+      {/* Spacer */}
+      <div className="h-16"></div>
     </>
   );
 }

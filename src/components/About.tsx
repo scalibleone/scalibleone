@@ -38,10 +38,10 @@ export default function About() {
           transition={{ duration: 0.6 }}
           className="text-center mb-16"
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#E5E7EB] mb-4">
             About <span className="gradient-text">ScalibleOne</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-[#9CA3AF] max-w-3xl mx-auto">
             We're a team of passionate developers who believe building digital products 
             should be accessible, affordable, and straightforward.
           </p>
@@ -53,12 +53,12 @@ export default function About() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6, delay: 0.2 }}
-          className="bg-white rounded-2xl shadow-xl p-8 md:p-12 mb-12"
+          className="bg-[#11161C] rounded-2xl shadow-xl shadow-black/30 border border-gray-800 p-8 md:p-12 mb-12"
         >
-          <h3 className="text-3xl font-bold text-gray-900 mb-6">Our Story</h3>
-          <div className="space-y-4 text-gray-600 leading-relaxed text-lg">
+          <h3 className="text-3xl font-bold text-[#E5E7EB] mb-6">Our Story</h3>
+          <div className="space-y-4 text-[#9CA3AF] leading-relaxed text-lg">
             <p>
-              ScalibleOne was founded with a simple mission: <span className="font-semibold text-gray-900">help founders, 
+              ScalibleOne was founded with a simple mission: <span className="font-semibold text-[#E5E7EB]">help founders, 
               small businesses, and creators bring their digital ideas to life without needing a full 
               development team or massive budget.</span>
             </p>
@@ -71,7 +71,7 @@ export default function About() {
               expertise</span>, we deliver professional-grade products faster and more affordably 
               than traditional agencies—without sacrificing quality.
             </p>
-            <p className="font-semibold text-gray-900">
+            <p className="font-semibold text-[#E5E7EB]">
               Whether you need a landing page, web app, mobile app, or full SaaS platform—we've got you covered.
             </p>
           </div>
@@ -88,17 +88,17 @@ export default function About() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: 0.1 * index }}
-                className="bg-white rounded-xl shadow-lg p-6 hover:shadow-2xl transition-shadow duration-300"
+                className="bg-[#11161C] rounded-xl shadow-lg shadow-black/20 border border-gray-800 p-6 hover:shadow-2xl hover:shadow-purple-500/10 transition-all duration-300"
               >
                 <div className="flex items-start gap-4">
-                  <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-purple-500 rounded-lg flex items-center justify-center flex-shrink-0">
+                  <div className="w-12 h-12 bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] rounded-lg flex items-center justify-center flex-shrink-0 shadow-lg shadow-purple-500/20">
                     <Icon className="w-6 h-6 text-white" />
                   </div>
                   <div>
-                    <h4 className="text-xl font-bold text-gray-900 mb-2">
+                    <h4 className="text-xl font-bold text-[#E5E7EB] mb-2">
                       {value.title}
                     </h4>
-                    <p className="text-gray-600">
+                    <p className="text-[#9CA3AF]">
                       {value.description}
                     </p>
                   </div>
@@ -116,7 +116,7 @@ export default function About() {
           transition={{ duration: 0.6, delay: 0.6 }}
           className="text-center mt-16"
         >
-          <p className="text-lg text-gray-600 mb-6">
+          <p className="text-lg text-[#9CA3AF] mb-6">
             Let's build something amazing together.
           </p>
           <button

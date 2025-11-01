@@ -17,9 +17,9 @@ export default function Hero() {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden gradient-bg">
       {/* Animated Background Elements */}
       <div className="absolute inset-0 overflow-hidden">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-pink-300 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-float" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-600/20 rounded-full mix-blend-screen filter blur-3xl animate-float"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500/20 rounded-full mix-blend-screen filter blur-3xl animate-float" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-indigo-500/20 rounded-full mix-blend-screen filter blur-3xl animate-float" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Content */}
@@ -30,21 +30,21 @@ export default function Hero() {
           transition={{ duration: 0.8 }}
         >
           {/* Badge */}
-          <div className="inline-flex items-center gap-2 bg-white/80 backdrop-blur-sm px-4 py-2 rounded-full shadow-lg mb-8">
-            <Users className="w-4 h-4 text-purple-600" />
-            <span className="text-sm font-semibold text-gray-700">
-              AI-Powered, Human-Perfected
+          <div className="inline-flex items-center gap-2 bg-[#11161C] backdrop-blur-sm px-4 py-2 rounded-full shadow-lg border border-gray-800 mb-8">
+            <Users className="w-4 h-4 text-[#8B5CF6]" />
+            <span className="text-sm font-semibold text-[#E5E7EB]">
+              AI-powered, Human-perfected
             </span>
           </div>
 
           {/* Main Headline */}
-          <h1 className="text-5xl md:text-7xl font-bold text-gray-900 mb-6 leading-tight">
+          <h1 className="text-5xl md:text-7xl font-bold text-[#E5E7EB] mb-6 leading-tight">
             We Build Your <br />
             <span className="gradient-text">Digital Product</span>
           </h1>
 
           {/* Subheadline */}
-          <p className="text-xl md:text-2xl text-gray-600 mb-12 max-w-3xl mx-auto">
+          <p className="text-xl md:text-2xl text-[#9CA3AF] mb-12 max-w-3xl mx-auto">
             From concept to launch, our expert team turns your ideas into 
             fully-functional products. <br className="hidden md:block" />
             No hassle. No uncertainty. Just results.
@@ -83,17 +83,17 @@ export default function Hero() {
           </div>
 
           {/* Trust Indicators */}
-          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-gray-500">
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-8 text-sm text-[#9CA3AF]">
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></div>
-              <span>Developers + AI assistants </span>
+              <div className="w-2 h-2 bg-[#10B981] rounded-full animate-pulse"></div>
+              <span>Developers + AI Assistants</span>
             </div>
             <div className="flex items-center gap-2">
-              <div className="w-2 h-2 bg-blue-500 rounded-full animate-pulse"></div>
+              <div className="w-2 h-2 bg-[#3B82F6] rounded-full animate-pulse"></div>
               <span>Full project support</span>
             </div>
             <div className="flex items-center gap-2">
-              <Sparkles className="w-3 h-3 text-purple-500" />
+              <Sparkles className="w-3 h-3 text-[#8B5CF6]" />
               <span>AI prototypes available</span>
             </div>
           </div>
@@ -106,8 +106,8 @@ export default function Hero() {
         animate={{ y: [0, 10, 0] }}
         transition={{ duration: 2, repeat: Infinity }}
       >
-        <div className="w-6 h-10 border-2 border-gray-400 rounded-full flex items-start justify-center p-2">
-          <div className="w-1.5 h-1.5 bg-gray-400 rounded-full"></div>
+        <div className="w-6 h-10 border-2 border-gray-600 rounded-full flex items-start justify-center p-2">
+          <div className="w-1.5 h-1.5 bg-[#8B5CF6] rounded-full"></div>
         </div>
       </motion.div>
     </section>

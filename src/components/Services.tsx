@@ -44,7 +44,7 @@ const services = [
 
 export default function Services() {
   return (
-    <section id="services" className="section-container bg-white">
+    <section id="services" className="section-container bg-[#0B0F14]">
       <div className="text-center mb-16">
         <motion.div
           initial={{ opacity: 0, y: 20 }}
@@ -52,10 +52,10 @@ export default function Services() {
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
         >
-          <h2 className="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl md:text-5xl font-bold text-[#E5E7EB] mb-4">
             What We <span className="gradient-text">Build</span>
           </h2>
-          <p className="text-xl text-gray-600 max-w-3xl mx-auto">
+          <p className="text-xl text-[#9CA3AF] max-w-3xl mx-auto">
             From simple landing pages to complex SaaS platforms—we have the expertise 
             to bring any digital product to life.
           </p>
@@ -72,28 +72,28 @@ export default function Services() {
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              className="card group hover:border-2 hover:border-purple-200 transition-all duration-300"
+              className="card group hover:border-[#8B5CF6] transition-all duration-300"
             >
               {/* Icon */}
-              <div className="w-14 h-14 bg-gradient-to-br from-blue-500 to-purple-500 rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300">
+              <div className="w-14 h-14 bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] rounded-xl flex items-center justify-center mb-4 group-hover:scale-110 transition-transform duration-300 shadow-lg shadow-purple-500/20">
                 <Icon className="w-7 h-7 text-white" />
               </div>
 
               {/* Title */}
-              <h3 className="text-2xl font-bold text-gray-900 mb-3">
+              <h3 className="text-2xl font-bold text-[#E5E7EB] mb-3">
                 {service.title}
               </h3>
 
               {/* Description */}
-              <p className="text-gray-600 mb-4 leading-relaxed">
+              <p className="text-[#9CA3AF] mb-4 leading-relaxed">
                 {service.description}
               </p>
 
               {/* Features */}
               <ul className="space-y-2">
                 {service.features.map((feature) => (
-                  <li key={feature} className="flex items-center text-sm text-gray-500">
-                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full mr-2"></div>
+                  <li key={feature} className="flex items-center text-sm text-[#9CA3AF]">
+                    <div className="w-1.5 h-1.5 bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] rounded-full mr-2"></div>
                     {feature}
                   </li>
                 ))}
@@ -109,10 +109,10 @@ export default function Services() {
         whileInView={{ opacity: 1, y: 0 }}
         viewport={{ once: true }}
         transition={{ duration: 0.6, delay: 0.8 }}
-        className="text-center mt-16 bg-gradient-to-r from-blue-50 to-purple-50 rounded-2xl p-8"
+        className="text-center mt-16 bg-[#11161C] border border-gray-800 rounded-2xl p-8"
       >
-        <p className="text-lg text-gray-700 mb-4">
-          <span className="font-semibold">Don't see what you need?</span> We build custom solutions too.
+        <p className="text-lg text-[#9CA3AF] mb-4">
+          <span className="font-semibold text-[#E5E7EB]">Don't see what you need?</span> We build custom solutions too.
         </p>
         <button
           onClick={() => {
