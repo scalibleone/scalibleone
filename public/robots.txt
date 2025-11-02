@@ -1,0 +1,9 @@
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://scalibleone.com
+
+# Sitemaps
+Sitemap: https://scalibleone.com/sitemap.xml
