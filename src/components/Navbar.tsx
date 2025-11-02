@@ -8,6 +8,7 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
+
 const navLinks = [
   { name: 'How We Work', scrollTo: 'how-it-works' },
   { name: 'About', scrollTo: 'about-section' },
@@ -19,6 +20,15 @@ const navLinks = [
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
+  const { user, signOut } = useAuth();
+  const router = useRouter();
+
+  const handleLogout = async () => {
+    await signOut();
+    setIsProfileMenuOpen(false);
+    router.push('/');
+  };
 
   // Handle scroll to change navbar background
   useEffect(() => {
@@ -33,7 +43,7 @@ export default function Navbar() {
   // Handle smooth scroll
   const handleScroll = (scrollTo: string) => {
     setIsMobileMenuOpen(false);
-    
+
     if (scrollTo === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -58,11 +68,10 @@ export default function Navbar() {
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
-          isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
             ? 'bg-[#0B0F14]/95 backdrop-blur-lg shadow-lg border-b border-gray-800'
             : 'bg-transparent'
-        }`}
+          }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -73,11 +82,11 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Image 
-                src="/logo.svg" 
-                alt="ScalibleOne Logo" 
-                width={45} 
-                height={45} 
+              <Image
+                src="/logo.svg"
+                alt="ScalibleOne Logo"
+                width={45}
+                height={45}
                 className="w-[45px] h-[45px]"
               />
               <span className="text-lg font-bold text-[#E5E7EB]">
