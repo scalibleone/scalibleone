@@ -30,12 +30,14 @@ export default function LoginPage() {
       setIsLoading(false);
     } else {
       // Check if user is admin
-      const userRole = data.user?.user_metadata?.role;
-      if (userRole === 'admin') {
-        router.push('/admin');
+      const userRole = data?.user?.user_metadata?.role || "user";
+
+      if (userRole === "admin") {
+        router.push("/admin");
       } else {
-        router.push('/');
+        router.push("/");
       }
+
     }
   };
 
@@ -63,11 +65,11 @@ export default function LoginPage() {
           className="text-center mb-8"
         >
           <Link href="/" className="inline-flex items-center gap-3 cursor-pointer hover:opacity-80 transition-opacity">
-            <Image 
-              src="/logo.svg" 
-              alt="ScalibleOne Logo" 
-              width={50} 
-              height={50} 
+            <Image
+              src="/logo.svg"
+              alt="ScalibleOne Logo"
+              width={50}
+              height={50}
               className="w-[50px] h-[50px]"
             />
             <span className="text-2xl font-bold text-[#E5E7EB]">
@@ -117,16 +119,30 @@ export default function LoginPage() {
               <div className="relative">
                 <Lock className="absolute left-4 top-1/2 transform -translate-y-1/2 w-5 h-5 text-[#9CA3AF]" />
                 <input
-                  type="password"
+                  type={showPassword ? "text" : "password"}
                   id="password"
                   name="password"
                   value={formData.password}
                   onChange={handleChange}
                   required
-                  className="w-full pl-12 pr-4 py-3 bg-[#0B0F14] border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] text-[#E5E7EB] placeholder-[#9CA3AF]"
+                  className="w-full pl-12 pr-12 py-3 bg-[#0B0F14] border border-gray-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#8B5CF6] text-[#E5E7EB] placeholder-[#9CA3AF]"
                   placeholder="••••••••"
                 />
+                <button
+                  type="button"
+                  onClick={() => setShowPassword(!showPassword)}
+                  className="absolute right-4 top-1/2 transform -translate-y-1/2 text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors"
+                >
+                  {showPassword ? <EyeOff className="w-5 h-5" /> : <Eye className="w-5 h-5" />}
+                </button>
               </div>
+            </div>
+
+            {/* Forgot Password Link */}
+            <div className="text-right -mt-2">
+              <Link href="/forgot-password" className="text-sm text-[#8B5CF6] hover:text-[#3B82F6] transition-colors">
+                Forgot password?
+              </Link>
             </div>
 
             {/* Error Message */}

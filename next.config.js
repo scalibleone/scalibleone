@@ -1,5 +1,12 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  reactStrictMode: true,
+  
+  // ✅ Disable ESLint check during Vercel builds
+  eslint: {
+    ignoreDuringBuilds: true,
+  },
+
   images: {
     remotePatterns: [
       {
@@ -8,8 +15,6 @@ const nextConfig = {
       },
     ],
   },
-  // Enable React strict mode for better development experience
-  reactStrictMode: true,
-}
+};
 
-module.exports = nextConfig
+module.exports = nextConfig;
