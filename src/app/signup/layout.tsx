@@ -1,5 +1,4 @@
 import { Metadata } from 'next';
-import type React from 'react';
 
 export const metadata: Metadata = {
   title: 'Sign Up - ScalibleOne - Build Fast. Scale Smart.',
