@@ -8,27 +8,20 @@ import Link from 'next/link';
 import { useAuth } from '@/contexts/AuthContext';
 import { useRouter } from 'next/navigation';
 
-
 const navLinks = [
   { name: 'How We Work', scrollTo: 'how-it-works' },
   { name: 'About', scrollTo: 'about-section' },
   { name: 'Services', scrollTo: 'services' },
   { name: 'Portfolio', scrollTo: 'demo-section' },
-  { name: 'Pricing', scrollTo: 'pricing' }, // Will be added later
+  { name: 'Pricing', scrollTo: 'pricing' },
 ];
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [isProfileMenuOpen, setIsProfileMenuOpen] = useState(false);
-  const { user, signOut } = useAuth();
+  const { user, signOut, loading } = useAuth();
   const router = useRouter();
-
-  const handleLogout = async () => {
-    await signOut();
-    setIsProfileMenuOpen(false);
-    router.push('/');
-  };
 
   // Handle scroll to change navbar background
   useEffect(() => {
@@ -43,7 +36,7 @@ export default function Navbar() {
   // Handle smooth scroll
   const handleScroll = (scrollTo: string) => {
     setIsMobileMenuOpen(false);
-
+    
     if (scrollTo === 'top') {
       window.scrollTo({ top: 0, behavior: 'smooth' });
       return;
@@ -51,7 +44,7 @@ export default function Navbar() {
 
     const element = document.getElementById(scrollTo);
     if (element) {
-      const offset = 70; // Account for navbar height
+      const offset = 70;
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - offset;
 
@@ -62,16 +55,23 @@ export default function Navbar() {
     }
   };
 
+  const handleLogout = async () => {
+    await signOut();
+    setIsProfileMenuOpen(false);
+    router.push('/');
+  };
+
   return (
     <>
       <motion.nav
         initial={{ y: -100 }}
         animate={{ y: 0 }}
         transition={{ duration: 0.5 }}
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${isScrolled
+        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+          isScrolled
             ? 'bg-[#0B0F14]/95 backdrop-blur-lg shadow-lg border-b border-gray-800'
             : 'bg-transparent'
-          }`}
+        }`}
       >
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
@@ -82,11 +82,11 @@ export default function Navbar() {
               whileHover={{ scale: 1.02 }}
               whileTap={{ scale: 0.98 }}
             >
-              <Image
-                src="/logo.svg"
-                alt="ScalibleOne Logo"
-                width={45}
-                height={45}
+              <Image 
+                src="/logo.svg" 
+                alt="ScalibleOne Logo" 
+                width={45} 
+                height={45} 
                 className="w-[45px] h-[45px]"
               />
               <span className="text-lg font-bold text-[#E5E7EB]">
@@ -107,23 +107,82 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Right: Login/Signup + Mobile Menu */}
+            {/* Right: Login/Signup OR Profile Dropdown + Mobile Menu */}
             <div className="flex items-center gap-3">
-              {/* Desktop: Login/Signup */}
-              <div className="hidden md:flex items-center gap-3">
-                <Link
-                  href="/login"
-                  className="text-sm font-medium text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors px-4 py-2"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/signup"
-                  className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white text-sm font-semibold px-5 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
-                >
-                  Sign Up
-                </Link>
-              </div>
+              {!loading && (
+                <>
+                  {user ? (
+                    // Profile Dropdown (Desktop)
+                    <div className="hidden md:block relative">
+                      <button
+                        onClick={() => setIsProfileMenuOpen(!isProfileMenuOpen)}
+                        className="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#11161C] border border-gray-800 hover:border-[#8B5CF6] transition-colors"
+                      >
+                        <div className="w-8 h-8 bg-gradient-to-br from-[#3B82F6] to-[#8B5CF6] rounded-full flex items-center justify-center">
+                          <User className="w-4 h-4 text-white" />
+                        </div>
+                        <span className="text-sm font-medium text-[#E5E7EB]">
+                          {user.user_metadata?.full_name || user.email?.split('@')[0] || 'User'}
+                        </span>
+                        <ChevronDown className={`w-4 h-4 text-[#9CA3AF] transition-transform ${isProfileMenuOpen ? 'rotate-180' : ''}`} />
+                      </button>
+
+                      {/* Dropdown Menu */}
+                      <AnimatePresence>
+                        {isProfileMenuOpen && (
+                          <motion.div
+                            initial={{ opacity: 0, y: 10 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            exit={{ opacity: 0, y: 10 }}
+                            transition={{ duration: 0.2 }}
+                            className="absolute right-0 mt-2 w-56 bg-[#11161C] border border-gray-800 rounded-lg shadow-xl shadow-black/20 overflow-hidden z-50"
+                          >
+                            <div className="p-3 border-b border-gray-800">
+                              <p className="text-sm font-semibold text-[#E5E7EB]">
+                                {user.user_metadata?.full_name || 'User'}
+                              </p>
+                              <p className="text-xs text-[#9CA3AF] truncate">{user.email}</p>
+                            </div>
+                            <div className="py-2">
+                              <Link
+                                href="/dashboard"
+                                onClick={() => setIsProfileMenuOpen(false)}
+                                className="flex items-center gap-3 px-4 py-2 text-sm text-[#E5E7EB] hover:bg-[#0B0F14] transition-colors"
+                              >
+                                <LayoutDashboard className="w-4 h-4" />
+                                Dashboard
+                              </Link>
+                              <button
+                                onClick={handleLogout}
+                                className="w-full flex items-center gap-3 px-4 py-2 text-sm text-red-400 hover:bg-[#0B0F14] transition-colors"
+                              >
+                                <LogOut className="w-4 h-4" />
+                                Logout
+                              </button>
+                            </div>
+                          </motion.div>
+                        )}
+                      </AnimatePresence>
+                    </div>
+                  ) : (
+                    // Login/Signup buttons (Desktop)
+                    <div className="hidden md:flex items-center gap-3">
+                      <Link
+                        href="/login"
+                        className="text-sm font-medium text-[#9CA3AF] hover:text-[#E5E7EB] transition-colors px-4 py-2"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        href="/signup"
+                        className="bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white text-sm font-semibold px-5 py-2 rounded-lg hover:shadow-lg hover:shadow-purple-500/20 transition-all duration-300"
+                      >
+                        Sign Up
+                      </Link>
+                    </div>
+                  )}
+                </>
+              )}
 
               {/* Mobile Menu Button */}
               <button
@@ -165,23 +224,58 @@ export default function Navbar() {
                 </motion.button>
               ))}
 
-              {/* Mobile: Login/Signup */}
-              <div className="pt-4 space-y-3 border-t border-gray-800">
-                <Link
-                  href="/login"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
-                >
-                  Login
-                </Link>
-                <Link
-                  href="/signup"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                  className="block w-full text-center bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
-                >
-                  Sign Up
-                </Link>
-              </div>
+              {/* Mobile: Login/Signup OR Profile */}
+              {!loading && (
+                <div className="pt-4 space-y-3 border-t border-gray-800">
+                  {user ? (
+                    // Logged in - show profile options
+                    <>
+                      <div className="px-4 py-3 bg-[#0B0F14] rounded-lg">
+                        <p className="text-sm font-semibold text-[#E5E7EB]">
+                          {user.user_metadata?.full_name || 'User'}
+                        </p>
+                        <p className="text-xs text-[#9CA3AF] truncate">{user.email}</p>
+                      </div>
+                      <Link
+                        href="/dashboard"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 w-full text-left px-4 py-3 text-[#E5E7EB] font-medium hover:bg-[#11161C] rounded-lg transition-colors"
+                      >
+                        <LayoutDashboard className="w-5 h-5" />
+                        Dashboard
+                      </Link>
+                      <button
+                        onClick={() => {
+                          setIsMobileMenuOpen(false);
+                          handleLogout();
+                        }}
+                        className="flex items-center gap-3 w-full text-left px-4 py-3 text-red-400 font-medium hover:bg-[#11161C] rounded-lg transition-colors"
+                      >
+                        <LogOut className="w-5 h-5" />
+                        Logout
+                      </button>
+                    </>
+                  ) : (
+                    // Not logged in - show login/signup
+                    <>
+                      <Link
+                        href="/login"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block w-full text-left px-4 py-3 text-[#9CA3AF] font-medium hover:bg-[#11161C] hover:text-[#E5E7EB] rounded-lg transition-colors"
+                      >
+                        Login
+                      </Link>
+                      <Link
+                        href="/signup"
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="block w-full text-center bg-gradient-to-r from-[#3B82F6] to-[#8B5CF6] text-white px-4 py-3 rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
+                      >
+                        Sign Up
+                      </Link>
+                    </>
+                  )}
+                </div>
+              )}
             </div>
           </motion.div>
         )}

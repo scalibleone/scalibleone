@@ -17,6 +17,11 @@
 /.next/
 /out/
 
+# build and runtime
+.next/
+node_modules/
+*.log
+
 # production
 /build
 
@@ -30,13 +35,23 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
-.env*
-.env.local
+# test artifacts
+/tests/
+/coverage/
 
+# OS/editor junk
+.DS_Store
+*.swp
+
+# env files (can opt-in for committing if needed)
+.env
+.env.local
+.env.*.local
 # vercel
 .vercel
 
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+.vercel
