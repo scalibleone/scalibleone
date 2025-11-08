@@ -7,6 +7,7 @@ import DemoSection from '@/components/DemoSection';
 import Pricing from '@/components/Pricing';
 import Footer from '@/components/Footer';
 
+
 export default function Home() {
   return (
     <>
